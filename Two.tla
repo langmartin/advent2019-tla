@@ -1,30 +1,36 @@
 ----------------------------- MODULE Two -----------------------------
-EXTENDS Integers
+EXTENDS Integers, TLC
 
-CONSTANTS tape
-VARIABLES i, halt
-
-R(j) == tape[j+3]
+CONSTANTS input
+VARIABLES tape, i, result
 
 Calc(Code, Op(_, _)) ==
   /\ tape[i] = Code
-  /\ tape[R(i)]' = Op(tape[i+1], tape[i+2])
+  /\ tape' = [tape EXCEPT ![tape[i+3]] = Op(tape[i+1], tape[i+2])]
   /\ i' = i+4
-  /\ UNCHANGED <<halt>>
+  /\ UNCHANGED <<result>>
 
 Add == Calc(1, LAMBDA x, y: x + y)
 Mult == Calc(2, LAMBDA x, y: x * y)
 
 Halt ==
   /\ tape[i] = 99
-  /\ halt' = 1
+  /\ result' = tape[1]
+  /\ UNCHANGED <<tape, i>>
     
 Init ==
   /\ i = 1
-  /\ halt = 0
+  /\ result = -1
+  /\ tape = input
+
+Eval ==
+  /\ result = -1
+  /\ \/ Add
+     \/ Mult
+     \/ Halt
 
 Next ==
-  /\ halt = 0
-    \/ Add \/ Mult \/ Halt
+  \/ result /= -1 /\ PrintT(result) /\ UNCHANGED <<tape, i, result>>
+  \/ Eval
 
 ======================================================================
