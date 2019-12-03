@@ -1,20 +1,12 @@
 ----------------------------- MODULE One -----------------------------
 EXTENDS Integers
 
+----------------------------- MODULE Fuel ----------------------------
+VARIABLES m
+f == (m \div 3) - 2
+======================================================================
+
 CONSTANTS modules
-VARIABLES results
-
-Fuel(mod) ==
-  (* /\ results' = results \cup {[m -> mod, f -> (mod \div 3) - 2]} *)
-  results' = results \cup {(mod \div 3) -2}
-
-(* Init ==
-  results = [modules |-> 0] *)
-
-Init ==
-  results = {}
-
-Next ==
-  \E m \in modules: Fuel(m)
-
+results == INSTANCE Fuel WITH m <- modules
+  
 ======================================================================
