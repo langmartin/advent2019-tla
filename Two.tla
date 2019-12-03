@@ -1,7 +1,7 @@
 ----------------------------- MODULE Two -----------------------------
 EXTENDS Integers, TLC
 
-CONSTANTS input, index
+CONSTANTS input, index, noun, verb
 VARIABLES tape, i, result
 
 \* input is 0 indexed, so we have to add 1 to destination position
@@ -22,7 +22,7 @@ Halt ==
 Init ==
   /\ i = 1
   /\ result = -1
-  /\ tape = input
+  /\ tape = [input EXCEPT ![2] = noun, ![3] = verb]
 
 Eval ==
   /\ result = -1
