@@ -1,7 +1,9 @@
 ----------------------------- MODULE Two -----------------------------
+
+----------------------------- MODULE Comp -----------------------------
 EXTENDS Integers, TLC
 
-CONSTANTS input, index, noun, verb
+CONSTANTS input, index
 VARIABLES tape, i, result
 
 \* input is 0 indexed, so we have to add 1 to destination position
@@ -22,7 +24,7 @@ Halt ==
 Init ==
   /\ i = 1
   /\ result = -1
-  /\ tape = [input EXCEPT ![2] = noun, ![3] = verb]
+  /\ tape = input
 
 Eval ==
   /\ result = -1
@@ -30,8 +32,32 @@ Eval ==
      \/ Mult
      \/ Halt
 
+Reset(n, v) ==
+  /\ i' = 1
+  /\ result' = -1
+  /\ tape' = [input EXCEPT ![2]=n, ![3]=v]
+  /\ Eval
+
+Ints == 0..1000
+
 Next ==
-  \/ result /= -1 /\ PrintT(result) /\ UNCHANGED <<tape, i, result>>
   \/ Eval
+  \/ CHOOSE n \in Ints: CHOOSE v \in Ints:
+     /\ Reset(n, v)
+     /\ Eval
+     /\ result = expected
+     /\ PrintT(100 * (n + v))
+
+======================================================================
+
+CONSTANTS input, index, expected
+VARIABLES comp
+
+Init ==
+
+Next ==
+  \/ /\ m.Next
+
+
 
 ======================================================================
