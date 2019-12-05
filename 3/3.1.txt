@@ -1,0 +1,27 @@
+TLC2 Version 2.14 of 10 July 2019 (rev: 0cae24f)
+Running breadth-first search Model-Checking with fp 51 and seed -6098606796463608771 with 1 worker on 8 cores with 3641MB heap and 64MB offheap memory [pid: 25476] (Mac OS X 10.14.6 x86_64, Oracle Corporation 11.0.2 x86_64, MSBDiskFPSet, DiskStateQueue).
+Parsing file /Users/lang/code/advent2019-tla/3/Three.tla
+***Parse Error***
+Encountered "|->" at line 68, column 48 and token "\"x\""
+
+Residual stack trace follows:
+Some [] Form starting at line 68, column 44.
+ExtendableExpr starting at line 68, column 44.
+Expression starting at line 68, column 44.
+Some { } form starting at line 68, column 43.
+ExtendableExpr starting at line 68, column 43.
+
+
+Fatal errors while parsing TLA+ spec in file Three
+
+tla2sany.semantic.AbortException
+*** Abort messages: 1
+
+In module Three
+
+Could not parse module Three from file Three.tla
+
+
+Starting... (2019-12-05 18:14:12)
+Error: Parsing or semantic analysis failed.
+Finished in 00s at (2019-12-05 18:14:12)
