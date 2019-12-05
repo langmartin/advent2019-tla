@@ -1,19 +1,14 @@
-4.2: Four2.tlc
-4.1: Four.tlc
-
-3.1: Three.tlc-pcal
-
-# %.cfg: %.tla
-# 	grep -ie '--algorithm' && pcal $^
-# 	touch $@
+4.2: 4/Four2.tlc
+4.1: 4/Four.tlc
+3.1: 3/Three.tlc-pcal
 
 %.tlc: %.tla %.cfg
-	tlc $*
+	cd $(dir $*); tlc $(notdir $*)
 
 %.pcal-tlc: %.tla
-	pcal $*
-	tlc $*
+	cd $(dir $*); pcal $(notdir $*)
+	cd $(dir $*); tlc $(notdir $*)
 
 %.pdf: %.tla %.cfg
-	tlatex -latexCommand /usr/local/texlive/2019/bin/x86_64-darwin/pdflatex $*
-	rm $*.aux $*.log $*.tex
+	cd $(dir $*); tlatex -latexCommand /usr/local/texlive/2019/bin/x86_64-darwin/pdflatex $(notdir $*)
+	cd $(dir $*); rm $*.aux $*.log $*.tex
