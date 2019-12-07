@@ -21,7 +21,7 @@ Start == UNION {EdgeOut(e): e \in Roots}
 More == UNION {EdgeOut(e): e \in Start}
 
 Init ==
-  /\ implicits = More
+  /\ implicits = {}
 
 Next ==
   /\ implicits' = UNION {ImplicitR(e): e \in Start} \ puzzle
