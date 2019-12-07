@@ -24,6 +24,6 @@ Init ==
   /\ implicits = {}
 
 Next ==
-  /\ implicits' = UNION {ImplicitR(e): e \in Start} \ puzzle
-  /\ PrintT(Cardinality(implicits'))
+  /\ implicits' = UNION {ImplicitR(e): e \in Roots} \ puzzle
+  /\ PrintT(Cardinality(implicits' \union puzzle))
 ======================================================================
